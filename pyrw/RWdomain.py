@@ -1,4 +1,3 @@
-import RWdomain
 import RWgeometry as RWgeo
 import RWessentials as rwe
 

@@ -16,7 +16,7 @@ class walker:
 		self.wid=wid
 		
 		#Coordinates
-		self.x0=x0
+		self.x0=array(x0)
 		self.x=self.x0.copy()
 		self.xold=self.x0.copy()
 		self.d=None

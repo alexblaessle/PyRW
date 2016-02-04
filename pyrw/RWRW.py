@@ -73,7 +73,6 @@ class RW:
 		
 		self.walkers.append(w)
 		
-		
 		return w
 
 	def getDomain(self):

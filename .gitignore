@@ -1,0 +1,16 @@
+#Don't push result and benchmarking folders
+
+results/
+results/test/
+results/test/old/
+benchmarking/
+
+#Don't push compiled python modules
+*.pyc
+
+#Dont push build/dist
+dist/
+build/
+
+#Dont push egg
+*.egg-info
