@@ -49,7 +49,7 @@ The API of pyrw can be found [here](http://pyrw.readthedocs.org/en/latest/pyrw.h
 The Documentation of pyrw can be found [here](http://pyrw.readthedocs.org/en/latest/pyrw.html "toAPI") .
 
 ## Example
-'''python
+```python
 	import pyrw
 
 	#Create RW
@@ -87,4 +87,4 @@ The Documentation of pyrw can be found [here](http://pyrw.readthedocs.org/en/lat
 	rw.printStatistics()
 
 	raw_input("Done, press [ENTER] to quit")
-'''
+```
