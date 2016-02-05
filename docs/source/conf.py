@@ -258,3 +258,10 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
+
+#Mocking numpy and matplotlib so they don't crash readthedocs
+import mock
+
+MOCK_MODULES = ['numpy', 'matplotlib', 'matplotlib.pyplot']
+for mod_name in MOCK_MODULES:
+	sys.modules[mod_name] = mock.Mock()
