@@ -52,7 +52,7 @@ import matplotlib.pyplot as plt
 #(15) combinations
 
 #===========================================================================
-#Module classes
+#Module functions
 #===========================================================================
 
 #Returns angle between two vertices around vcenter 

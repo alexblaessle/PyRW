@@ -24,7 +24,7 @@
 #Importing necessary modules
 #===========================================================================
 
-from numpy import *
+import numpy as np
 
 class RWparm:
 
@@ -41,6 +41,6 @@ class RWparm:
                 
                 self.spacing=spacing
                 
-                self.parmVec=linspace(self.startValue,self.endValue,self.steps)
+                self.parmVec=np.linspace(self.startValue,self.endValue,self.steps)
 
                 

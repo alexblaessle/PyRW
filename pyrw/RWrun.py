@@ -24,7 +24,7 @@
 #Importing necessary modules
 #===========================================================================
 
-from numpy import *
+import numpy as np
 import matplotlib.pyplot as plt
 import sys
 import time

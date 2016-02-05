@@ -27,7 +27,7 @@
 import RWgeometry as RWgeo
 import RWessentials as rwe
 
-from numpy import *
+import numpy as np
 import matplotlib.pyplot as plt
 
 
@@ -152,15 +152,15 @@ class domain:
 		outside=True
 		while outside:
 	
-			xrand=(xmax - xmin) * random.random() + xmin
-			yrand=(ymax - ymin) * random.random() + ymin
+			xrand=(xmax - xmin) * np.random.random() + xmin
+			yrand=(ymax - ymin) * np.random.random() + ymin
 		
 			if self.typ=='poly':
 				if rwe.checkInsidePoly([xrand,yrand],poly):
-					return array([xrand,yrand])
+					return np.array([xrand,yrand])
 			if self.typ=='circle':
 				if rwe.checkInsideCircle([xrand,yrand],self.edges[0].vcenter.x,0.999*self.edges[0].radius,tol=0.)<0:
-					return array([xrand,yrand])
+					return np.array([xrand,yrand])
 			else:
 				print "Warning, can not generate random points for geometry of typ = ", self.typ
 				return False,False

@@ -24,7 +24,7 @@
 #Importing necessary modules
 #===========================================================================
 
-from numpy import *
+import numpy as np
 
 class superposition:
 	
@@ -43,13 +43,13 @@ class superposition:
 	
 		#Direction
 		if self.kappa==0 or self.walker.d==None:
-			phi_rand=random.uniform(-1,1,1)[0]*pi
+			phi_rand=np.random.uniform(-1,1,1)[0]*np.pi
 		else:
-			phi_rand=random.vonmises(self.walker.d,self.kappa)
-		direc=array([cos(phi_rand),sin(phi_rand)])
+			phi_rand=np.random.vonmises(self.walker.d,self.kappa)
+		direc=np.array([np.cos(phi_rand),np.sin(phi_rand)])
 		
 		#Choosing step length
-		rho_rand=abs(random.exponential(self.r))
+		rho_rand=abs(np.random.exponential(self.r))
 		
 		#update coordinate
 		self.walker.xold=self.walker.x.copy()

@@ -24,7 +24,7 @@
 #Importing necessary modules
 #===========================================================================
 
-from numpy import *
+import numpy as np
 import sys
 import RWdomain
 import RWwalker
@@ -42,7 +42,7 @@ class RW:
 		self.N=N
 		self.P=P
 			
-		self.tvec=arange(self.tstart,self.tend,self.deltat)
+		self.tvec=np.arange(self.tstart,self.tend,self.deltat)
 		
 		self.runs=[]
 		self.walkers=[]
@@ -86,7 +86,7 @@ class RW:
 				sys.stdout.flush()
 		
 	#Add walker
-	def addWalker(self,x0=array([0,0]),RWtyp='MRW',color='b',BCtyp='sticky',HCtyp=None,hitGroup=[],typ='typ0',hitTypes=None,detectRadius=1.,successRate=1.):
+	def addWalker(self,x0=np.array([0,0]),RWtyp='MRW',color='b',BCtyp='sticky',HCtyp=None,hitGroup=[],typ='typ0',hitTypes=None,detectRadius=1.,successRate=1.):
 		if len(self.walkers)==0:
 			new_wid=0
 		else:
@@ -119,7 +119,7 @@ class RW:
 		rt=[]
 		for r in self.runs:
 			rt.append(r.runtime)
-		return mean(rt)
+		return np.mean(rt)
 	
 	def getTotalRuntime(self):
 		rt=[]
@@ -157,9 +157,9 @@ class RW:
                                 ls.append(w.L)
                                 sds.append(w.SD)
                 
-                self.mT=mean(ts)
-                self.mL=mean(ls)
-                self.msd=mean(sds)
+                self.mT=np.mean(ts)
+                self.mL=np.mean(ls)
+                self.msd=np.mean(sds)
                 
                 self.getTotalRuntime()
                 

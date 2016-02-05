@@ -11,7 +11,7 @@ vcenter=d.addVertex([0,0])
 c=d.addCircle(vcenter,35)
 
 ##Add run
-r=rw.addNRuns(3)
+r=rw.addNRuns(1)
 
 #Draw domain
 d.draw(ann=False)
@@ -25,24 +25,14 @@ for i in range(5):
 
 rw.setVarForAllRuns('walkerOfInterest',w)
 
-#rw.runs[0].start(plotStep=True)
+rw.runs[0].start(plotStep=True)
 
 #rw.runAll(printProcess=True,printRunProcess=False)
-#rw.computeStatistics()
-#rw.printStatistics()
+
+rw.computeStatistics()
+rw.printStatistics()
 
 #rw.saveToFile("bla.pk")
-
-#print rw.getTotalRuntime()
-
-
-#Start run
-#r.start(plotStep=False)
-#r.plotTraj()
-
-
-
-
 
 raw_input()
 

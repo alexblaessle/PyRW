@@ -24,7 +24,7 @@
 #Importing necessary modules
 #===========================================================================
 
-from numpy import *
+import numpy as np
 import RWessentials as rwe
 
 class BC(object):
@@ -42,7 +42,7 @@ class BC(object):
 		
 		for i in range(len(poly)):
 			p1 = poly[i]
-			p2 = poly[mod(i+1,len(poly))]
+			p2 = poly[np.mod(i+1,len(poly))]
 			
 			x_intersect=self.segIntersect(xold,xnew,p1.x,p2.x)
 		
@@ -179,9 +179,9 @@ class BC(object):
 		f=x1-arc.vcenter.x
 		
 		#Compute polynomial coeffcients
-		a = dot(d,d) 
-		b = 2*dot(f,d) 
-		c = dot(f,f) - arc.radius**2 
+		a = np.dot(d,d) 
+		b = 2*np.dot(f,d) 
+		c = np.dot(f,f) - arc.radius**2 
 		
 		#discriminant
 		discriminant = b*b-4*a*c
@@ -314,7 +314,7 @@ class setBack(BC):
 			if direcBehaviour==0:
 				self.walker.d=None
 			elif direcBehaviour==1:
-				self.walker.d=mod(self.walker.d+pi,2*pi)
+				self.walker.d=np.mod(self.walker.d+pi,2*np.pi)
 			
                 return xinterc
 	
@@ -333,7 +333,7 @@ class setBack(BC):
 		if self.direcBehaviour==0:
 			self.walker.d=None
 		elif self.direcBehaviour==1:
-			self.walker.d=mod(self.walker.d+pi,2*pi)			
+			self.walker.d=np.mod(self.walker.d+np.pi,2*np.pi)			
 		
 		if self.circCheck(xnew,self.edge.vcenter.x,self.edge.radius,tol=0.)>=0:
 			return xold

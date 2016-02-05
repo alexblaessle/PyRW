@@ -24,7 +24,7 @@
 #Importing necessary modules
 #===========================================================================
 
-from numpy import *
+import numpy as np
 import RWBC
 import RWHC
 import RWstep
@@ -33,7 +33,7 @@ import RWessentials as rwe
 
 class walker:
 	
-	def __init__(self,RW,x0=array([0,0]),RWtyp='MRW',color='r',wid=None,BCs=[],BCtyp='sticky',HCtyp=None,hitGroup=[],typ='typ0',hitTypes=None,detectRadius=1.,successRate=1.):
+	def __init__(self,RW,x0=np.array([0,0]),RWtyp='MRW',color='r',wid=None,BCs=[],BCtyp='sticky',HCtyp=None,hitGroup=[],typ='typ0',hitTypes=None,detectRadius=1.,successRate=1.):
 		
 		#Refer to RW
 		self.RW=RW
@@ -42,7 +42,7 @@ class walker:
 		self.wid=wid
 		
 		#Coordinates
-		self.x0=array(x0)
+		self.x0=np.array(x0)
 		self.x=self.x0.copy()
 		self.xold=self.x0.copy()
 		self.d=None
@@ -69,7 +69,7 @@ class walker:
 		self.traj=[self.x0]
 		
 		#BCs
-		self.BCmap=zeros((2,len(self.RW.domain.edges)))
+		self.BCmap=np.zeros((2,len(self.RW.domain.edges)))
 		self.BCIds=[]
 		self.BCtyp=0
 		

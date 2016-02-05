@@ -24,7 +24,8 @@
 #Importing necessary modules
 #===========================================================================
 
-from numpy import *
+import numpy as np
+
 import RWsuperposition
 
 class step(object):
@@ -55,7 +56,7 @@ class step(object):
 	def performStep(self):
 		
 		#Pick random number to choose which superposition
-		rand_mode=random.random()
+		rand_mode=np.random.random()
 		
 		#Check which superposition to perform
 		for i in range(len(self.gammaVec)): 

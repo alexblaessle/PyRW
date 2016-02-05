@@ -24,7 +24,9 @@
 #Importing necessary modules
 #===========================================================================
 
-from numpy import *
+import numpy as np
+
+
 import RWessentials as rwe
 
 class HC(object):
@@ -54,15 +56,15 @@ class stop(HC):
 		
 	def hit(self,suc=1.,debug=False):
 		
-		if min(linalg.norm(self.walker.x-array(self.walker.hitGroupLoc),axis=1))<self.walker.detectRadius:
+		if min(np.linalg.norm(self.walker.x-np.array(self.walker.hitGroupLoc),axis=1))<self.walker.detectRadius:
 			
 			if debug:
 				print "Walker ", self.walker.wid, " encountered walker ", self.walker.hitGroupWalkers[argmin(linalg.norm(self.walker.x-array(self.walker.hitGroupLoc),axis=1))].wid
 			
-			suc_rand=random.random()
+			suc_rand=np.random.random()
 			if suc_rand<min(suc,self.suc):
 				if debug:
-					print "Walker ", self.walker.wid, " terminated at walker ", self.walker.hitGroupWalkers[argmin(linalg.norm(self.walker.x-array(self.walker.hitGroupLoc),axis=1))].wid
+					print "Walker ", self.walker.wid, " terminated at walker ", self.walker.hitGroupWalkers[argmin(np.linalg.norm(self.walker.x-np.array(self.walker.hitGroupLoc),axis=1))].wid
 				self.walker.currRun.stop(True)
 				return True
 
