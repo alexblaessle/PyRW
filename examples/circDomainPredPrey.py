@@ -1,3 +1,6 @@
+#Simple example script of predator chasing 5 prey in circular domain
+#RW simulation stops of predator finds a prey.
+
 import pyrw
 
 #Create RW
@@ -33,10 +36,6 @@ rw.runs[0].start(plotStep=True)
 #Print Final statistic
 rw.computeStatistics()
 rw.printStatistics()
-
-#Save everything to pickle file
-#rw.saveToFile("myfirstrw.pk")
-
 
 raw_input("Done, press [ENTER] to quit")
 

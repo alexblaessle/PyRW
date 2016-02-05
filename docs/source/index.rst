@@ -1,7 +1,7 @@
 pyrw documentation
 ================================
 
-Contents:
+API:
 ==================
 
 .. toctree::
@@ -18,10 +18,14 @@ Contents:
    pyrw.RWBC.rst
    pyrw.RWgeometry.rst 
    pyrw.RWwalker.rst
-   help.rst            
+   
+Documentation:
+==================
 
+.. toctree::
+   :maxdepth: 3   
    
-   
+   help.rst            
 
 Indices and tables
 ==================
