@@ -4,7 +4,8 @@
 PyRW: A Python based 2D random walk simulation tool box
 """
 
-
+import numpy as np
+import matplotlib.pyplot as plt
 
 from . import RWessentials
 from . import RWgeometry
