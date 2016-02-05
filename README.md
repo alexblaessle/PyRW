@@ -17,3 +17,7 @@ A Python based 2D random walk simulation tool box
 ## Installation
 
 python setup.py install
+
+## API
+
+The API of pyrw can be found [here1](http://pyrw.readthedocs.org/en/latest/pyrw.html#submodules "Der Linktitel")
