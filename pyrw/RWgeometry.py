@@ -28,7 +28,7 @@
 import RWessentials as rwe
 
 #Numpy
-from numpy import *
+import numpy as np
 
 #Matplotlib
 import matplotlib.pyplot as plt
@@ -68,7 +68,7 @@ class vertex:
 		
 		self.domain=domain
 		
-		self.x=array(x)
+		self.x=np.array(x)
 		self.Id=Id
 				
 	def draw(self,r=None,color=None,ann=False):
@@ -262,7 +262,7 @@ class arc(edge):
 		
 		"""
 		
-		if linalg.norm(vend.x-vcenter.x)==linalg.norm(vstart.x-vcenter.x):
+		if np.linalg.norm(vend.x-vcenter.x)==np.linalg.norm(vstart.x-vcenter.x):
 				
 			self.vcenter=vcenter
 			self.vstart=vstart
@@ -317,7 +317,7 @@ class arc(edge):
 		return self.angle,self.angle_offset
 	
 	def computeRadius(self):
-		self.radius=linalg.norm(self.vstart.x-self.vcenter.x)
+		self.radius=np.linalg.norm(self.vstart.x-self.vcenter.x)
 		return self.radius
 	
 	def computeVend(self):
@@ -337,7 +337,7 @@ class arc(edge):
 		
 		"""
 		
-		return self.vcenter+radius*array([cos(angle),sin(angle)])
+		return self.vcenter+radius*np.array([np.cos(angle),np.sin(angle)])
 		
 	def setAngle(self,angle):
 		
@@ -363,7 +363,7 @@ class arc(edge):
 		
 		"""
 		
-		a=rwe.compute_angle(array([self.radius,0])-self.vcenter.x,x-self.vcenter.x)
+		a=rwe.compute_angle(np.array([self.radius,0])-self.vcenter.x,x-self.vcenter.x)
 		
 		if debug:
 			print 
@@ -372,7 +372,7 @@ class arc(edge):
 			print "arc.angle_offset = " , self.angle_offset
 			
 			
-		if mod(a,2*pi)<self.angle+self.angle_offset and self.angle_offset<=mod(a,2*pi):
+		if np.mod(a,2*np.pi)<self.angle+self.angle_offset and self.angle_offset<=np.mod(a,2*pi):
 			if debug:
 				print True
 			return True

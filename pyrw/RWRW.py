@@ -76,9 +76,9 @@ class RW:
 		return self.runs
 	
 	#Perform all runs
-	def runAll(self,printProcess=True,printRunProcess=False):
+	def runAll(self,printProcess=True,printRunProcess=False,plotStep=False):
 		for i,r in enumerate(self.runs):
-			r.start(printProcess=printRunProcess)
+			r.start(printProcess=printRunProcess,plotStep=plotStep)
 			
 			if printProcess:
 				currPerc=floor(float(i)/float(len(self.runs))*100)

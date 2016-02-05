@@ -14,10 +14,33 @@ A Python based 2D random walk simulation tool box
 - Live plotting
 - Final Statistics
 
+# Getting Started
+
 ## Installation
 
-python setup.py install
+If you have Python2.7 already installed, simply obtain PyRW
+
+	git clone https://github.com/alexblaessle/PyRW
+	
+and install via:
+
+	python setup.py install
+
+### Requirements
+
+PyRW only depends on 
+
+- numpy>=1.8.2
+- matplotlib>=1.4.3
+- pickle
+
+and a bunch of standard Python2.7 libraries such as
+
+- time
+- platform
+- sys
 
 ## API
 
 The API of pyrw can be found [here](http://pyrw.readthedocs.org/en/latest/pyrw.html#submodules "toAPI")
+
