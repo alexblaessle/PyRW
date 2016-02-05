@@ -20,4 +20,4 @@ python setup.py install
 
 ## API
 
-The API of pyrw can be found [here1](http://pyrw.readthedocs.org/en/latest/pyrw.html#submodules "Der Linktitel")
+The API of pyrw can be found [here](http://pyrw.readthedocs.org/en/latest/pyrw.html#submodules "toAPI")
