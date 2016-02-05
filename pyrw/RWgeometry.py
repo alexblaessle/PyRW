@@ -1,19 +1,69 @@
+#===========================================================================
+#License
+#===========================================================================
+
+#Copyright (C) 2016 Alexander Blaessle
+#This software is distributed under the terms of the GNU General Public License.
+
+#This file is part of PyRW.
+
+#PyRW is free software: you can redistribute it and/or modify
+#it under the terms of the GNU General Public License as published by
+#the Free Software Foundation, either version 3 of the License, or
+#(at your option) any later version.
+
+#This program is distributed in the hope that it will be useful,
+#but WITHOUT ANY WARRANTY; without even the implied warranty of
+#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#GNU General Public License for more details.
+
+#You should have received a copy of the GNU General Public License
+#along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#===========================================================================
+#Importing necessary modules
+#===========================================================================
+
 import RWessentials as rwe
 from numpy import *
 import matplotlib.pyplot as plt
 
 class vertex:
 	
+	"""Vertex class for defining domain geometry.
+
+	:param domain:  A pyrw domain.
+	:type domain: pyrw.RWdomain
+	:param x: A coordinate, e.g. [0,1].
+	:type x: array
+	:param Id: ID of vertex.
+	:type Id: int
+	
+	"""
+	
 	def __init__(self,domain,x,Id):
+		
 		self.domain=domain
 		
 		self.x=array(x)
 		self.Id=Id
-			
-	def draw(self,r=None,color=None,ann=None):
+				
+	def draw(self,r=None,color=None,ann=False):
+		
+		"""Draw vertex
+		
+		:param r: pyrw run, if None, picks last run of main pyrw.RWRW object. 
+		:type r: pyrw.RWrun object
+		:param color: color of vertex in matplotlib syntax, e.g. 'r' or (0.1,1,0.5)
+		:type color: matplotlib color
+		:param ann: Annotation Flag
+		:type ann: bool
+		
+		"""
 		
 		if ann==None:
 			ann=False
+		
 		
 		if r==None:
 			r=self.domain.RW.runs[-1]
@@ -29,9 +79,26 @@ class vertex:
 		plt.draw()
 		
 	def setX(self,x):
+		"""Define vertex location
+		
+		:param x: A coordinate, e.g. [0,1]
+		:type x: array
+		
+		"""
 		self.x=x
 
 class edge:
+	
+	"""Edge class for defining domain geometry.
+
+	:param domain:  A pyrw domain.
+	:type domain: pyrw.RWdomain
+	:param Id: ID of edge.
+	:type Id: int
+	:param typ: Edge type
+	:type typ: int
+	
+	"""
 	
 	def __init__(self,domain,Id,typ):
 		self.domain=domain
@@ -48,12 +115,31 @@ class edge:
 		return self.typ
 	
 	def decodeTyp(self):
+		
+		"""Returns type of edge in words.
+		
+		:returns: str -- type of the edge
+		"""
+		
 		if typ==1:
 			return "arc"
 		elif typ==0:
 			return "line"
 	
 class line(edge):
+	
+	"""Line class for defining domain geometry.
+
+	:param domain:  A pyrw domain.
+	:type domain: pyrw.RWdomain
+	:param Id: ID of line.
+	:type Id: int
+	:param v1: Start vertex of the line.
+	:type v1: pyrw.RWgeometry.vertex
+	:param v2: Second vertex of the line.
+	:type v2: pyrw.RWgeometry.vertex
+	
+	"""
 	
 	def __init__(self,domain,v1,v2,Id):
 		
@@ -63,10 +149,22 @@ class line(edge):
 		self.v2=v2
 	
 		
-	def draw(self,r=None,color=None,ann=None):
+	def draw(self,r=None,color=None,ann=False):
+		
+		"""Draw vertex
+		
+		:param r: pyrw run, if None, picks last run of main pyrw.RWRW object. 
+		:type r: pyrw.RWrun
+		:param color: color of line in matplotlib syntax, e.g. 'r' or (0.1,1,0.5)
+		:type color: matplotlib color
+		:param ann: Annotation Flag
+		:type ann: bool
+		
+		"""
 		
 		if ann==None:
 			ann=False
+		
 		
 		if r==None:
 			r=self.domain.RW.runs[-1]
@@ -79,12 +177,28 @@ class line(edge):
 		r.ax_traj.plot([self.v1.x[0],self.v2.x[0]],[self.v1.x[1],self.v2.x[1]],color=color,linestyle='-')
 		if ann:
 			
-			
 			r.ax_traj.annotate('e'+str(self.Id), xytext=((self.v2.x[0]+self.v1.x[0])/2., (self.v2.x[1]+self.v1.x[1])/2.+0.5),xy=(self.v1.x[0]+0.5, self.v1.x[1]+0.5),)
 		
 		plt.draw()
 
 class arc(edge):
+	
+	"""Arc class for defining domain geometry.
+
+	:param domain:  A pyrw domain.
+	:type domain: pyrw.RWdomain
+	:param vstart: Start vertex of the arc.
+	:type vstart: pyrw.RWgeometry.vertex
+	:param vcenter: Center vertex of the arc.
+	:type vcenter: pyrw.RWgeometry.vertex
+	:param Id: ID of arc.
+	:type Id: int
+	:param vend: Second vertex of the arc.
+	:type vend: pyrw.RWgeometry.vertex
+	:param angle: Angle of arc.
+	:type angle: float
+	
+	"""
 	
 	def __init__(self,domain,vstart,vcenter,Id,vend=None,angle=None):
 		
@@ -222,7 +336,18 @@ class arc(edge):
 	def getXcenter(self):
 		return self.vcenter.x
 	
-	def draw(self,r=None,color=None,ann=None):
+	def draw(self,r=None,color=None,ann=False):
+		
+		"""Draw arc
+		
+		:param r: pyrw run, if None, picks last run of main pyrw.RWRW object. 
+		:type r: pyrw.RWrun
+		:param color: color of arc in matplotlib syntax, e.g. 'r' or (0.1,1,0.5)
+		:type color: matplotlib color
+		:param ann: Annotation Flag
+		:type ann: bool
+		
+		"""
 		
 		if ann==None:
 			ann=False
@@ -246,6 +371,18 @@ class arc(edge):
 		plt.draw()
 
 class circle:
+	
+	"""Circle class for defining domain geometry.
+
+	:param domain:  A pyrw domain.
+	:type domain: pyrw.RWdomain
+	:param vcenter: Center vertex of the arc.
+	:type vcenter: pyrw.RWgeometry.vertex
+	:param radius: Radius.
+	:type radius: float
+	
+	"""
+	
 	
 	def __init__(self,domain,vcenter,radius):
 		self.domain=domain
@@ -311,6 +448,19 @@ class circle:
 			a.draw()
 			
 class rectangle:
+	
+	"""Rectangle class for defining domain geometry.
+
+	:param domain:  A pyrw domain.
+	:type domain: pyrw.RWdomain
+	:param voffset: Offset vertex of the arc.
+	:type voffset: pyrw.RWgeometry.vertex
+	:param lenx: Sidelength in x direction.
+	:type lenx: float
+	:param leny: Sidelength in y direction.
+	:type leny: float
+	
+	"""
 	
 	def __init__(self,domain,voffset,lenx,leny):
 		
