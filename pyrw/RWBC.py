@@ -37,8 +37,6 @@ class BC(object):
 		self.edge=edge
 		self.direcBehaviour=direcBehaviour
 		
-	
-	
 	#Return intersection of last path with polgygon
 	def findIntersectPoly(self,xold,xnew,poly):
 		

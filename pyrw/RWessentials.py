@@ -24,8 +24,36 @@
 #Importing necessary modules
 #===========================================================================
 
+#Numpy
 import numpy as np
+
+#Matplotlib
 import matplotlib.pyplot as plt
+
+#===========================================================================
+#Module description
+#===========================================================================
+
+#Module with essential functions for pyrw, including the following functions:
+
+#(1) angle_from_vertices
+#(2) dist
+#(3) norm
+#(4) compute_angle
+#(5) create_arc_curve
+#(6) cross2d
+#(7) perp
+#(8) outwPerp
+#(9) cross2d
+#(11) unit_vector
+#(12) direc_angle
+#(13) checkInsidePoly
+#(14) checkInsideCircle
+#(15) combinations
+
+#===========================================================================
+#Module classes
+#===========================================================================
 
 #Returns angle between two vertices around vcenter 
 def angle_from_vertices(vcenter,vstart,vend,samedist=False):

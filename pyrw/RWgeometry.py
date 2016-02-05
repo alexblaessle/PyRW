@@ -24,9 +24,32 @@
 #Importing necessary modules
 #===========================================================================
 
+#pyrw modules
 import RWessentials as rwe
+
+#Numpy
 from numpy import *
+
+#Matplotlib
 import matplotlib.pyplot as plt
+
+#===========================================================================
+#Module description
+#===========================================================================
+
+#Geometry module of pyrw containing classes for defining the 2D geometry of 
+#the domain for random walkers, including the following classes:
+
+#(1) vertex
+#(2) edge
+#(3) line
+#(4) arc
+#(5) circe
+#(6) rectangle
+
+#===========================================================================
+#Module classes
+#===========================================================================
 
 class vertex:
 	
@@ -228,6 +251,17 @@ class arc(edge):
 			
 	def genFromPoints(self,vcenter,vstart,vend):
 		
+		""" Initializes arc if vend was given at initialization
+		
+		:param vstart: Start vertex of the arc.
+		:type vstart: pyrw.RWgeometry.vertex
+		:param vcenter: Center vertex of the arc.
+		:type vcenter: pyrw.RWgeometry.vertex
+		:param vend: Second vertex of the arc.
+		:type vend: pyrw.RWgeometry.vertex
+		
+		"""
+		
 		if linalg.norm(vend.x-vcenter.x)==linalg.norm(vstart.x-vcenter.x):
 				
 			self.vcenter=vcenter
@@ -242,6 +276,18 @@ class arc(edge):
 			print "Warning, |vcenter-vstart|!=|vcenter-vend|. Will not initialize arc ", self.Id ," properly"
 		
 	def genFromAngle(self,vcenter,vstart,angle):
+		
+		""" Initializes arc if angle was given at initialization
+		
+		:param vstart: Start vertex of the arc.
+		:type vstart: pyrw.RWgeometry.vertex
+		:param vcenter: Center vertex of the arc.
+		:type vcenter: pyrw.RWgeometry.vertex
+		:param angle: Angle of arc.
+		:type angle: float
+		
+		"""
+		
 		self.angle=angle
 		self.vcenter=vcenter
 		self.vstart=vstart
@@ -253,13 +299,20 @@ class arc(edge):
 	
 	def computeAngle(self,debug=False):
 		
+		"""Computes both angle and angle_offset of arc
+		
+		:param debug: Debugging flag.
+		:type debug: bool
+		:returns: (float,float) -- angle, angle_offset
+		
+		"""
+		
 		self.angle_offset=rwe.angle_from_vertices(self.vcenter,vertex(self.domain,[self.radius,0.],-1),self.vstart)
 		self.angle=rwe.direc_angle(self.vstart.x-self.vcenter.x,self.vend.x-self.vcenter.x)
 	
 		if debug:
 			print "angle_offset = ", self.angle_offset
 			print "angle = ", self.angle
-		
 		
 		return self.angle,self.angle_offset
 	
@@ -274,6 +327,16 @@ class arc(edge):
 		self.vstart.setX(self.computePoint(self.angle_offset,self.radius))
 	
 	def computePoint(self,angle,radius):
+		
+		"""Computes point on arc
+		
+		:param angle: Point's angle.
+		:type angle: float
+		:param radius: Point's radius.
+		:type radius: float
+		
+		"""
+		
 		return self.vcenter+radius*array([cos(angle),sin(angle)])
 		
 	def setAngle(self,angle):
@@ -290,6 +353,15 @@ class arc(edge):
 		return radius
 	
 	def inArc(self,x,debug=False):
+		
+		"""Checks if points x lies on arc
+		
+		:param x: coordinate.
+		:type x: array
+		:param debug: Debugging flag.
+		:type debug: bool
+		
+		"""
 		
 		a=rwe.compute_angle(array([self.radius,0])-self.vcenter.x,x-self.vcenter.x)
 		
@@ -361,8 +433,6 @@ class arc(edge):
 			r.fig_traj.show()
 			
 		xvec,yvec=rwe.create_arc_curve(self.vcenter,self.angle,self.angle_offset,self.radius)
-		
-		#r.ax_traj.plot(xvec,yvec,color=color,linestyle='-')
 		
 		r.ax_traj.plot(xvec,yvec,color='r',linestyle='-')
 		if ann:
