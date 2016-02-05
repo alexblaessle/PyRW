@@ -24,7 +24,7 @@
 #Importing necessary modules
 #===========================================================================
 
-#pyrw modules
+#PyRW modules
 import RWessentials as rwe
 
 #Numpy
@@ -174,7 +174,7 @@ class line(edge):
 		
 	def draw(self,r=None,color=None,ann=False):
 		
-		"""Draw vertex
+		"""Draw line
 		
 		:param r: pyrw run, if None, picks last run of main pyrw.RWRW object. 
 		:type r: pyrw.RWrun

@@ -24,10 +24,29 @@
 #Importing necessary modules
 #===========================================================================
 
+#Numpy
 import numpy as np
 
-
+#PyRW
 import RWessentials as rwe
+
+#===========================================================================
+#Module description
+#===========================================================================
+
+"""
+Hitting condition module of pyrw containing classes for what happens if random walkers
+meet each other, including the following classes:
+
+(1) HC
+(2) stop
+(3) kill
+
+"""
+
+#===========================================================================
+#Module classes
+#===========================================================================
 
 class HC(object):
 	

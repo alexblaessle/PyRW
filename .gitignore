@@ -5,6 +5,9 @@ results/test/
 results/test/old/
 benchmarking/
 
+#Don't push deprecated modules
+pyrw/deprecated/
+
 #Don't push compiled python modules
 *.pyc
 
@@ -14,3 +17,7 @@ build/
 
 #Dont push egg
 *.egg-info
+
+#Dont push shell scripts
+*.sh
+

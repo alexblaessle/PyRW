@@ -24,10 +24,27 @@
 #Importing necessary modules
 #===========================================================================
 
+#Numpy
 import numpy as np
+
+#Matplotlib
 import matplotlib.pyplot as plt
+
+#Misc
 import sys
 import time
+
+#===========================================================================
+#Module description
+#===========================================================================
+
+"""
+Random walk run module of pyrw containing the run class.
+"""
+
+#===========================================================================
+#Module classes
+#===========================================================================
 
 class run:
 

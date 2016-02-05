@@ -24,16 +24,43 @@
 #Importing necessary modules
 #===========================================================================
 
+#PyRW
 import RWgeometry as RWgeo
 import RWessentials as rwe
 
-
-	
+#Numpy
 import numpy as np
+
+#Matplotlib
 import matplotlib.pyplot as plt
+
+#===========================================================================
+#Module description
+#===========================================================================
+
+"""
+Domain module of pyrw containing classes for defining all the elements defining
+the geometry of the domain for random walkers, including the following classes:
+
+(1 domain)
+"""
+
+#===========================================================================
+#Module classes
+#===========================================================================
 
 
 class domain:
+	
+		
+	"""Domain class for defining random walk domain.
+
+	:param RW:  A pyrw RW.
+	:type RW: pyrw.RWRW
+	:param typ: Type of domain 
+	:type typ: str
+	
+	"""
 	
 	def __init__(self,RW,typ='poly'):
 		
@@ -44,6 +71,15 @@ class domain:
 		self.RW=RW
 		
 	def addVertex(self,x):
+		
+		"""Adds vertex to domain.
+
+		:param x:  2D coordinate.
+		:type x: pyrw.RWRW
+		:returns: pyrw.geometry.vertex -- vertex object
+		
+		"""
+			
 		if len(self.vertices)==0:
 			new_Id=0
 		else:
@@ -58,6 +94,18 @@ class domain:
 		return v
 		
 	def addLine(self,v1,v2):
+		
+		
+		"""Adds line from v1 to v2 to domain.
+
+		:param v1:  Vertex object.
+		:type v1: pyrw.geometry.vertex
+		:param v2:  Vertex object.
+		:type v2: pyrw.geometry.vertex
+		:returns: pyrw.geometry.line -- line object
+		
+		"""
+		
 		if len(self.lines)==0:
 			new_Id=0
 		else:
@@ -73,6 +121,21 @@ class domain:
 		return e
 	
 	def addArc(self,vstart,vcenter=None,vend=None,angle=None):
+		
+		"""Adds arc from vstart to vend around vcenter to domain.
+
+		:param vstart:  Vertex object.
+		:type vstart: pyrw.geometry.vertex
+		:param vcenter:  Vertex object.
+		:type vcenter: pyrw.geometry.vertex
+		:param vend:  Vertex object.
+		:type vend: pyrw.geometry.vertex
+		:param angle: Angle.
+		:type angle: float
+		:returns: pyrw.geometry.arc -- arc object
+		
+		"""
+		
 		if len(self.arcs)==0:
 			new_Id=0
 		else:
@@ -88,12 +151,33 @@ class domain:
 	
 	def addCircle(self,vcenter,radius,BC=""):
 		
+		"""Adds circle around vcenter with r=radius to domain.
+
+		:param vcenter:  Vertex object.
+		:type vcenter: pyrw.geometry.vertex
+		:param radius:  Radius of circle.
+		:type radius: float
+		:returns: pyrw.geometry.circle -- circle object
+		"""
+		
 		c=RWgeo.circle(self,vcenter,radius)
 		self.typ='circle'
 			
 		return c
 
 	def addRectangle(self,voffset,lenx,leny):
+		
+		"""Adds rectangle with offset voffset and sidelengths lenx,leny to domain.
+
+		:param voffset:  Vertex object.
+		:type voffset: pyrw.geometry.vertex
+		:param lenx:  Sidelength in x direction.
+		:type lenx: float
+		:param leny:  Sidelength in y direction.
+		:type leny: float
+		:returns: pyrw.geometry.rectangle -- rectangle object
+		"""
+		
 		r=RWgeo.rectangle(self,voffset,lenx,leny)
 		self.typ='poly'
 		return r
@@ -103,12 +187,31 @@ class domain:
 		return self.RW
 	
 	def edgeByID(self,ID):
+		
+		"""Returns edge given its ID
+
+		:param ID:  ID of edge.
+		:type ID: int
+		:returns: pyrw.geometry.edge -- edge object
+		"""
+		
 		for i,e in enumerate(self.edges):
 			if e.ID==ID:
 				return e,i
 		return False,False
 		
-	def draw(self,r=None,color=None,ann=None):
+	def draw(self,r=None,color=None,ann=False):
+		
+		"""Draw all geometrical elements associated with domain.
+		
+		:param r: pyrw run, if None, picks last run of main pyrw.RWRW object. 
+		:type r: pyrw.RWrun
+		:param color: color of elements in matplotlib syntax, e.g. 'r' or (0.1,1,0.5)
+		:type color: matplotlib color
+		:param ann: Annotation Flag
+		:type ann: bool
+		
+		"""
 		
 		if ann==None:
 			ann=False
@@ -132,6 +235,12 @@ class domain:
 			a.draw(r=r,color=color,ann=ann)	
 		
 	def getExtend(self):
+		
+		"""Returns x-y-extend of domain.
+
+		:returns: (float,float,float,float) -- (minX,maxX,minY,maxY)
+		"""
+		
 		x=[]
 		y=[]
 		for v in self.vertices:
@@ -141,12 +250,23 @@ class domain:
 		return min(x), max(x), min(y),max(y)
 	
 	def verticesCoordsToList(self):
+		
+		"""Returns list with coordinates of all vertices of domain.
+
+		:returns: list -- list with coordinates
+		"""
+		
 		l=[]
 		for v in self.vertices:
 			l.append(v.x)
 		return l
 	
 	def genRandomPoint(self):
+		
+		"""Returns random coordinate inside domain.
+
+		:returns: array -- coordinate
+		"""
 		
 		xmin,xmax,ymin,ymax=self.getExtend()
 		poly=self.verticesCoordsToList()

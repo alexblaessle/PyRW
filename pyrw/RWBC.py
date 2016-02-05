@@ -24,8 +24,32 @@
 #Importing necessary modules
 #===========================================================================
 
+#Numpy
 import numpy as np
+
+#PyRW
 import RWessentials as rwe
+
+#===========================================================================
+#Module description
+#===========================================================================
+
+"""
+Boundary condition module of pyrw containing classes for defining boundary conditions of 
+the domain for random walkers, including the following classes:
+
+(1) BC
+(2) sticky
+(3) setBack
+(4) absorb
+(5) reflect
+(6) randomReflect
+
+"""
+
+#===========================================================================
+#Module classes
+#===========================================================================
 
 class BC(object):
 	

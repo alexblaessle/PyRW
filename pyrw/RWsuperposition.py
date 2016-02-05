@@ -24,7 +24,24 @@
 #Importing necessary modules
 #===========================================================================
 
+#Numpy
 import numpy as np
+
+#===========================================================================
+#Module description
+#===========================================================================
+
+"""
+Superposition module of pyrw containing classes describing superposition of
+random walk steps, including the following classes:
+
+(1) superposition
+
+"""
+
+#===========================================================================
+#Module classes
+#===========================================================================
 
 class superposition:
 	

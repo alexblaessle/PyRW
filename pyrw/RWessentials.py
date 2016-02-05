@@ -55,9 +55,23 @@ import matplotlib.pyplot as plt
 #Module functions
 #===========================================================================
 
-#Returns angle between two vertices around vcenter 
+
 def angle_from_vertices(vcenter,vstart,vend,samedist=False):
 	
+
+	"""Returns angle between two vertices around vcenter.
+
+	:param vcenter:  Vertex object.
+	:type vcenter: pyrw.geometry.vertex
+	:param vstart:  Vertex object.
+	:type vstart: pyrw.geometry.vertex
+	:param vend:  Vertex object.
+	:type vend: pyrw.geometry.vertex
+	:param samedist:  Flag if vectors need to have same length.
+	:type samedist: bool
+	:returns: float -- angle
+	"""
+
 	#Check if equal distant
 	if samedist:
 		if not dist(vend.x,vcenter.x)==dist(vstart.x,vcenter.x):
@@ -73,16 +87,44 @@ def angle_from_vertices(vcenter,vstart,vend,samedist=False):
 	
 	return angle
 
-#Returns distance between two points
+
 def dist(p1,p2):
+	
+	"""Returns euclidean distance between two points.
+
+	:param p1:  Point 1.
+	:type p1: array
+	:param p2:  Point 2.
+	:type p2: array
+	
+	:returns: float -- distance
+	"""
+	
 	return  norm(p1-p2)
 
-#Returns L2 norm of vector
+
 def norm(vec):
+	
+	"""Returns L2-norm of vector.
+
+	:param vec:  Vector.
+	:type vec: array
+	:returns: float -- length of vector
+	"""
+	
 	return np.linalg.norm(vec)
 
-#Returns angle between two vectors		
+		
 def compute_angle(vec1,vec2):
+		
+	"""Returns angle between two vectors.
+
+	:param vec1:  Vector.
+	:type vec1: array
+	:param vec2:  Vector.
+	:type vec2: array
+	:returns: float -- angle
+	"""	
 		
 	#Determine sign through atan2
 	dv=vec1-vec2
@@ -114,6 +156,22 @@ def compute_angle(vec1,vec2):
 
 def create_arc_curve(vcenter,angle,angle_offset,radius,steps=100):
 	
+	"""Creates array with points describing the curve of an arc.
+
+	:param vcenter:  Vertex object.
+	:type vcenter: pyrw.geometry.vertex
+	:param angle:  Angle of arc.
+	:type angle: float
+	:param angle_offset:  Offset angle of arc.
+	:type angle_offset: float
+	:param radius:  radius of arc.
+	:type radius: float
+	:param steps:  number of steps for arc.
+	:type steps: int
+	
+	:returns: (array,array) -- vectors describing x/y-coordinates
+	"""
+	
 	anglevec=np.linspace(angle_offset,angle_offset+angle,steps)
 	
 	xvec=vcenter.x[0]+radius*np.cos(anglevec)
@@ -121,20 +179,47 @@ def create_arc_curve(vcenter,angle,angle_offset,radius,steps=100):
 	
 	return xvec, yvec
 
-#Returns reduced 2D cross product
 def cross2d(x1,x2):
+	
+	"""Returns reduced 2D cross product.
+
+	:param x1:  Coordinate 1.
+	:type x1: array
+	:param x2:  Coordinate 2.
+	:type x2: array
+	
+	:returns: float -- cross product
+	"""
+	
 	return float(x1[0]*x2[1]-x1[1]*x2[0])	
 
-#Returns perpandicular vector
 def perp(x):
+	
+	"""Returns perpendicular vector.
+
+	:param x:  Vector.
+	:type x: array
+	
+	:returns: array -- perpendicular vector
+	"""
+	
 	xp = np.empty_like(x)
 	xp[0] = -x[1]
 	xp[1] = x[0]
 	return xp
 
-#Returns outward perpandicular vector	
 def outwPerp(x,c):
        
+	"""Returns outward perpendicular vector.
+
+	:param x:  Vector.
+	:type x: array
+	:param c:  Center coordinate.
+	:type c: array
+	
+	:returns: array -- perpendicular vector
+	"""
+	
 	xp = np.empty_like(x)
 	xp[0] = -x[1]
 	xp[1] = x[0]
@@ -144,12 +229,32 @@ def outwPerp(x,c):
         else:
                 return -xp
 
-#Returns unit vector	
+
 def unit_vector(vector):
+	
+	"""Returns unit vector.
+
+	:param vector:  Vector.
+	:type vector: array
+	
+	:returns: array -- unit vector
+	"""
+	
 	return vector / np.linalg.norm(vector)
 
-#Returns directional vector
+
 def direc_angle(v1,v2):
+	
+	"""Returns directional angle.
+
+	:param v1:  Vector.
+	:type v1: array
+	:param v2:  Vector.
+	:type v2: array
+	
+	:returns: array -- directional angle
+	"""
+	
 	v1_u = unit_vector(v1)
 	v2_u = unit_vector(v2)
 	angle = np.arccos(np.dot(v1_u, v2_u))
@@ -160,9 +265,20 @@ def direc_angle(v1,v2):
 			return np.pi
 	return angle
 
-#Returns true if coord is in poly
 def checkInsidePoly(coord,poly):
-	#Taken from http://www.ariel.com.au/a/python-point-int-poly.html
+	
+	"""Returns True if coord is inside poly.
+	
+	Taken from http://www.ariel.com.au/a/python-point-int-poly.html
+	
+	:param coord:  Coordinate.
+	:type coord: array
+	:param poly:  Polygon corners.
+	:type poly: list
+	
+	:returns: bool -- True if inside
+	"""
+	
 	n = len(poly)
 	inside =False
 	
@@ -184,6 +300,24 @@ def checkInsidePoly(coord,poly):
 	return inside
 
 def checkInsideCircle(x,center,radius,tol=1E-30,debug=False):
+	
+	"""Returns True if x is inside circle.
+	
+	:param x:  Coordinate.
+	:type x: array
+	:param center:  Coordinate of center.
+	:type center: array
+	:param radius:  Radius of circle.
+	:type radius: float
+	:param center:  Tolerance added to check to avoid rounding errors.
+	:type center: float
+	:param debug:  Debugging flag.
+	:type debug: bool
+	
+	
+	:returns: bool -- True if inside
+	"""
+	
         val=np.linalg.norm(x-center)-radius
 	if abs(val)<tol:
 		return 0
@@ -192,7 +326,17 @@ def checkInsideCircle(x,center,radius,tol=1E-30,debug=False):
 		return val
 
 def combinations(arrays,out=None):
-                
+        
+        """Returns cartesian product of arrays.
+	
+	:param arrays:  List of arrays.
+	:type arrays: list
+	:param out: Result vector.
+	:type out: array
+	
+	:returns: array -- Cartesian product
+	"""
+        
         #Convert all arrays to np arrays
         arrays = [np.asarray(x) for x in arrays]
         

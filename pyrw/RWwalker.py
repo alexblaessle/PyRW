@@ -24,12 +24,32 @@
 #Importing necessary modules
 #===========================================================================
 
+#Numpy
 import numpy as np
+
+#PyRW
 import RWBC
 import RWHC
 import RWstep
 import RWessentials as rwe
 
+#===========================================================================
+#Module description
+#===========================================================================
+
+"""
+walker module of pyrw containing classes describing all properties of
+walkers, including the following classes:
+
+(1) walker
+
+"""
+
+
+
+#===========================================================================
+#Module classes
+#===========================================================================
 
 class walker:
 	

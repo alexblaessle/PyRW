@@ -24,12 +24,29 @@
 #Importing necessary modules
 #===========================================================================
 
+#Numpy
 import numpy as np
+
+#Misc
 import sys
+
+#PyRW
 import RWdomain
 import RWwalker
 import RWrun
 import RWmisc
+
+#===========================================================================
+#Module description
+#===========================================================================
+
+"""
+Random walk RW module of pyrw containing the RW class.
+"""
+
+#===========================================================================
+#Module classes
+#===========================================================================
 
 class RW:
 	

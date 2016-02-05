@@ -24,9 +24,30 @@
 #Importing necessary modules
 #===========================================================================
 
+#Numpy
 import numpy as np
 
 import RWsuperposition
+
+#===========================================================================
+#Module description
+#===========================================================================
+
+"""
+Step module of pyrw containing classes describing random walk steps for walkers, 
+including the following classes:
+
+(1) step
+(2) MRWstep
+(3) CRWstep
+(4) CorRWstep
+(5) CCRWstep
+
+"""
+
+#===========================================================================
+#Module classes
+#===========================================================================
 
 class step(object):
 

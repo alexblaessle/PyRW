@@ -24,8 +24,29 @@
 #Importing necessary modules
 #===========================================================================
 
+#Misc
 import pickle
 import platform
+import csv
+
+#===========================================================================
+#Module description
+#===========================================================================
+
+"""
+Miscellaneous module of pyrw containing functions for IO, printing etc., including 
+the following functions:
+
+(1) printVariable
+(2) setVariable
+(3) saveToPickle
+(4) loadFromPickle
+(5) listToCSV
+"""
+
+#===========================================================================
+#Module functions
+#===========================================================================
 
 def printVariable(var,obj):
         print var, " = ", vars(obj)[str(var)]
