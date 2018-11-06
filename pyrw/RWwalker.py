@@ -246,7 +246,7 @@ class walker:
 	def getX0(self):
 		return self.x0
 	
-	def genStep(self,typ,rs=[1.,3.],gammas=[0.5,0.5],kappas=[0.,3.]):	
+	def genStep(self,typ,rs=[1.,3.],gammas=[0.5,0.5],kappas=[0.,3.],gammaSup=1,gammaStep=0.1,gammaMin=0.2):	
 		if typ=='MRW':
 			self.step=RWstep.MRWstep(self,rs[0])
 		elif typ=='CRW':
@@ -255,7 +255,12 @@ class walker:
 			self.step=RWstep.CRWstep(self,r,kappas[1])
 		elif typ=='CCRW':
 			self.step=RWstep.CCRWstep(self,rs[0],rs[1],gammas[0],kappas[1])
+		elif typ=='SCCRW':
+			
+			self.step=RWstep.SCCRWstep(self,rs[0],rs[1],gammas[0],kappas[1],gammaSup=gammaSup,gammaStep=gammaStep,gammaMin=gammaMin)
+			
 		else:
+			print "Unknown walker type ", typ
 			self.step=RWstep.step(self,-1)
 			for i in range(len(rs)):
 				self.step.addSuperposition(rs[i],gammas[i],kappas[i])
@@ -276,7 +281,7 @@ class walker:
 		
 		self.currRun.checkFig()
 		
-		traj=array(self.traj)
+		traj=np.array(self.traj)
 		if color==None:
 			self.currRun.ax_traj.plot(traj[:,0],traj[:,1],self.color)
 		else:	

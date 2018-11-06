@@ -1,0 +1,22 @@
+Added SCCRW step class.
+
+Added a new step type: Super-Correlated-Composite-Random-Walk (SCCRW).
+The SCCRW changes the likelihood to re-enter the correlated movement 
+mode when entered in step before, that is, once in search phase, the 
+RWer is more likely to re-enter search phase.
+
+TODO:
+	- Speed up live-plotting.
+	- Document Code and update doc style. 
+	- Add random time step length and speeds.
+	
+Additions:
+	- Added RWstep.SCCRW class with functionalities.
+	- Added additional example.
+	
+Changes:
+
+Bugfixes:
+	- Fixed bug in RWwalker.plotTraj
+	
+	

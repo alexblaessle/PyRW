@@ -171,9 +171,64 @@ class CCRWstep(step):
                 self.superpositions[1].setR(r)
                 return r
                 
-                
-		
+class SCCRWstep(CCRWstep):
 	
+	def __init__(self,w,r1,r2,gamma,kappa,gammaSup=1,gammaStep=0.1,gammaMin=0.2):
+		super(SCCRWstep, self).__init__(w,r1,r2,gamma,kappa)
+		
+		self.origGamma=gamma
+		self.gammaStep=gammaStep
+		self.gammaMin=gammaMin
+		
+		self.gammaSup=gammaSup
+		
+		
+		
+	def performStep(self):
+		
+		"""Overwrite performStep."""
+		
+		#Pick random number to choose which superposition
+		rand_mode=np.random.random()
+		
+		#Check which superposition to perform
+		for i in range(len(self.gammaVec)): 
+			#print self.gamaVec[i], " <= ", rand_mode , " < = " 
+			if self.gammaVec[i]<=rand_mode and rand_mode<=self.gammaVec[i+1]:
+				self.superpositions[i].doStep()
+				
+				# Special clause to adjust gamma
+				if i==self.gammaSup:
+					idxs=[0,1]
+					idxs.remove(self.gammaSup)
+					idx=idxs[0]
+					
+					gammaNew=max(self.superpositions[idx].gamma-self.gammaStep,self.gammaMin)
+					self.updateGamma(gammaNew)
+				
+				else:
+					self.setBackGamma()
+				
+				break
+		
+	def setBackGamma(self):
+		self.updateGamma(self.origGamma)
+	
+	def updateGamma(self,gamma):
+		self.setGamma(gamma)
+		self.updateGammaDist()
+		
+	def setOrigGamma(self,gamma):
+		self.origGamma=gamma
+		self.setGamma(gamma)
+		self.updateGammaDist()
+		
+	def setGammaStep(self,gammaStep):
+		self.gammaStep=gammaStep
+		
+	def setGammaMin(self,gammaMin):
+		self.gammaMin=gammaMin
+		
 	
 	
 	

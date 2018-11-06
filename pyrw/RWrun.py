@@ -85,7 +85,6 @@ class run:
 				if plotStep:
 					self.plotStep()
 			else:
-				
 				break
 			
 		self.stop(False)

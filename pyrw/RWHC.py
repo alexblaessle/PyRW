@@ -88,7 +88,15 @@ class stop(HC):
 				return True
 
 		return False
+
+class none(HC):
 	
+	
+	def __init__(self,RW,w,Id,suc=1.):
+		super(stop, self).__init__(RW,w,0,Id,suc=suc)
+	
+	def hit(self):
+		return False
 	
 #class kill(HC):
 	
